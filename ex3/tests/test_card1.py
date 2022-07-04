@@ -41,5 +41,5 @@ def test_incorrect_pin(create_card1):
 
 def test_block_card(create_card1):
     for i in range(2):
-        response = create_card1.send(str(i))
+        response = create_card1.send('00 00 00 00 00')
     assert response == '69 83'
