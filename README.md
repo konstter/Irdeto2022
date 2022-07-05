@@ -72,74 +72,91 @@ pytest -v
 More close technique is "decision table"
 
 1. Query for first state (all correct)
-Command: 'A4 20 00 00 00'
-Expected response: '63 C5' (X = 5 is my retry count)
+
+- Command: 'A4 20 00 00 00'
+- Expected response: '63 C5' (X = 5 is my retry count)
 
 2. Invalid CLA and the next elements of header, params and body don't matter
-Command: '20 20 00 00 00'
-Expected response: '63 00' (verification failed)
+
+- Command: '20 20 00 00 00'
+- Expected response: '63 00' (verification failed)
 
 3. Valid CLA and Invalid INS and the next elements of params and body don't matter
-Command: '20 20 00 00 00'
-Expected response: '63 00' (verification failed)
+
+- Command: '20 20 00 00 00'
+- Expected response: '63 00' (verification failed)
 
 4. Valid CLA and INS, invalid P1 and the next elements don't matter
-Command: 'A4 20 01 00 00'
-Expected response: '6A 86' (incorrect parameters)
+
+- Command: 'A4 20 01 00 00'
+- Expected response: '6A 86' (incorrect parameters)
 
 5. Valid CLA and INS, valid P1, invalid P2 and the next elements don't matter
-Command: 'A4 20 00 03 00'
-Expected response: '6A 86' (incorrect parameters)
+
+- Command: 'A4 20 00 03 00'
+- Expected response: '6A 86' (incorrect parameters)
 
 6. Check retry counter
-Command: 'A4 20 00 00 00'
-Expected response: '63 C3'
+
+- Command: 'A4 20 00 00 00'
+- Expected response: '63 C3'
 
 7. Valid CLA and INS, valid P1-P2, invalid Lc and Data doesn't matter
-Command: 'A4 20 00 00 01'
-Expected response: '63 00' (verification failed)
+
+- Command: 'A4 20 00 00 01'
+- Expected response: '63 00' (verification failed)
 
 8. Valid CLA and INS, valid P1-P2, invalid Lc and Data doesn't matter #2
-Command: 'A4 20 00 01 00' or 'A4 20 00 02 00'
-Expected response: '63 00' (verification failed)
+
+- Command: 'A4 20 00 01 00' or 'A4 20 00 02 00'
+- Expected response: '63 00' (verification failed)
 
 9. Valid CLA and INS, valid P1-P2 Lc and Data don't match
-Command: 'A4 20 00 01 03 00 00 00 00' or 'A4 20 00 02 05 05 05'
-Expected response: '63 00' (verification failed)
+
+- Command: 'A4 20 00 01 03 00 00 00 00' or 'A4 20 00 02 05 05 05'
+- Expected response: '63 00' (verification failed)
 
 10. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid PIN
-Command: 'A4 20 00 01 04 00 00 00 00'
-Expected response: '63 00' (verification failed)
+
+- Command: 'A4 20 00 01 04 00 00 00 00'
+- Expected response: '63 00' (verification failed)
 
 11. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN
-Command: 'A4 20 00 01 04 01 09 04 07'
-Expected response: '90 00' and retry counter returns to 5 (verification passed)
+
+- Command: 'A4 20 00 01 04 01 09 04 07'
+- Expected response: '90 00' and retry counter returns to 5 (verification passed)
 
 13. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid PIN
-Command: 'A4 20 00 01 04 01 09 04 05' and retry counter = 1
-Expected response: '69 83' (auth method is blocked)
+
+- Command: 'A4 20 00 01 04 01 09 04 05' and retry counter = 1
+- Expected response: '69 83' (auth method is blocked)
 
 NOTE: There is my understanding of df pin (in cases 14-18 and further). 
 I suppose that DF pin is for unblock auth method
 
 14. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is passed
-Command: 'A4 20 00 02 05 05 07 01 00 02' (my 5-bytes DF PIN = 57102) 
-Expected response: '90 00' (nothing happens verification is OK)
+
+- Command: 'A4 20 00 02 05 05 07 01 00 02' (my 5-bytes DF PIN = 57102) 
+- Expected response: '90 00' (nothing happens verification is OK)
 
 15. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is passed
-Command: 'A4 20 00 02 05 05 07 01 01 02'
-Expected response: '90 00' (nothing happens verification is OK)
+
+- Command: 'A4 20 00 02 05 05 07 01 01 02'
+- Expected response: '90 00' (nothing happens verification is OK)
 
 16. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is failed
-Command: 'A4 20 00 02 05 05 07 01 00 02'
-Expected response: '63 C5' (counter returns to 5)
+
+- Command: 'A4 20 00 02 05 05 07 01 00 02'
+- Expected response: '63 C5' (counter returns to 5)
 
 17. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and auth method is blocked
-Command: 'A4 20 00 02 05 05 07 01 00 02'
-Expected response: '63 C5' (counter returns to 5, auth is unblocked)
+
+- Command: 'A4 20 00 02 05 05 07 01 00 02'
+- Expected response: '63 C5' (counter returns to 5, auth is unblocked)
 
 18. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is failed 
 or auth method is blocked
+
 Command: 'A4 20 00 02 05 05 07 01 00 02'
 Expected response: '69 83' (auth method is blocked)
 
@@ -148,11 +165,13 @@ NOTE: I suppose Le field matters when Verification is recuired
 
 19. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
 Le is not empty, and retry counter > 1
+
 Command: 'A4 20 00 01 04 01 09 04 07 00'
 Expected response: '63 00' (verification failed)
 
 10. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
 Le is not empty, and retry counter = 1
+
 Command: 'A4 20 00 01 04 01 09 04 07 00'
 Expected response: '69 83' (auth method is blocked)
 
