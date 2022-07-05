@@ -131,7 +131,7 @@ More close technique is "decision table"
 - Command: 'A4 20 00 01 04 01 09 04 05' and retry counter = 1
 - Expected response: '69 83' (auth method is blocked)
 
-NOTE: There is my understanding of df pin (in cases 14-18 and further). 
+NOTE: There is my understanding of df pin (in cases 14-17). 
 I suppose that DF pin is for unblock auth method
 
 13. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is passed
