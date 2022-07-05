@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 def solution(A):
     global c

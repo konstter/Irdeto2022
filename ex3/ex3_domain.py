@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 class Card:
     def __init__(self):
         self.isblocked = False
