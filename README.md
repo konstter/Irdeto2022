@@ -126,7 +126,7 @@ More close technique is "decision table"
 - Command: 'A4 20 00 01 04 01 09 04 07'
 - Expected response: '90 00' and retry counter returns to 5 (verification passed)
 
-13. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid PIN
+12. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid PIN
 
 - Command: 'A4 20 00 01 04 01 09 04 05' and retry counter = 1
 - Expected response: '69 83' (auth method is blocked)
@@ -134,44 +134,44 @@ More close technique is "decision table"
 NOTE: There is my understanding of df pin (in cases 14-18 and further). 
 I suppose that DF pin is for unblock auth method
 
-14. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is passed
+13. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is passed
 
 - Command: 'A4 20 00 02 05 05 07 01 00 02' (my 5-bytes DF PIN = 57102) 
 - Expected response: '90 00' (nothing happens verification is OK)
 
-15. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is passed
+14. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is passed
 
 - Command: 'A4 20 00 02 05 05 07 01 01 02'
 - Expected response: '90 00' (nothing happens verification is OK)
 
-16. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is failed
+15. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and verification is failed
 
 - Command: 'A4 20 00 02 05 05 07 01 00 02'
 - Expected response: '63 C5' (counter returns to 5)
 
-17. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and auth method is blocked
+16. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid DF PIN, and auth method is blocked
 
 - Command: 'A4 20 00 02 05 05 07 01 00 02'
 - Expected response: '63 C5' (counter returns to 5, auth is unblocked)
 
-18. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is failed 
+17. Valid CLA and INS, valid P1-P2, valid Lc, and Data with invalid DF PIN, and verification is failed 
 or auth method is blocked
 
-Command: 'A4 20 00 02 05 05 07 01 00 02'
-Expected response: '69 83' (auth method is blocked)
+- Command: 'A4 20 00 02 05 05 07 01 00 02'
+- Expected response: '69 83' (auth method is blocked)
 
 
 NOTE: I suppose Le field matters when Verification is recuired
 
-19. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
+18. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
 Le is not empty, and retry counter > 1
 
-Command: 'A4 20 00 01 04 01 09 04 07 00'
-Expected response: '63 00' (verification failed)
+- Command: 'A4 20 00 01 04 01 09 04 07 00'
+- Expected response: '63 00' (verification failed)
 
-10. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
+19. Valid CLA and INS, valid P1-P2, valid Lc, and Data with valid PIN (or Data is empty), 
 Le is not empty, and retry counter = 1
 
-Command: 'A4 20 00 01 04 01 09 04 07 00'
-Expected response: '69 83' (auth method is blocked)
+- Command: 'A4 20 00 01 04 01 09 04 07 00'
+- Expected response: '69 83' (auth method is blocked)
 
